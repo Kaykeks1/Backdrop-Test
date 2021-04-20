@@ -30,7 +30,8 @@ app.get('/l/:sid', async (req, res) => {
     console.log('data.sid: ', data.sid);
     console.log(typeof data.sid);
     // await axios.post('http://localhost:8082/graphiql?',
-    await axios.post(`http://localhost:8082/graphiql?query=query%7B%0A%20%20getShortenURL(sid%3A%20%22${data.sid}%22)%7B%0A%20%20%20%20url%0A%20%20%7D%0A%7D`,
+    // await axios.post(`http://localhost:8082/graphiql?query=query%7B%0A%20%20getShortenURL(sid%3A%20%22${data.sid}%22)%7B%0A%20%20%20%20url%0A%20%20%7D%0A%7D`,
+    await axios.post(`${location.origin}/graphiql?query=query%7B%0A%20%20getShortenURL(sid%3A%20%22${data.sid}%22)%7B%0A%20%20%20%20url%0A%20%20%7D%0A%7D`,
      {
         // query: `query{getShortenURL(sid: ${data.sid}){url}}`,
         // variables: null
@@ -65,4 +66,4 @@ app.use('/graphiql', graphqlHTTP({
   graphiql: true
 }))
 
-app.listen(8082, () => console.log('Running on port 8082'));
+app.listen(process.env.PORT || 8082, () => console.log('Running on port 8082'));
